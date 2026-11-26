@@ -795,7 +795,7 @@ const JEIL_DRUG_MAP = {
   "텔미칸정": { diseases: ["고혈압"], ingredients: ["텔미사르탄 (Telmisartan)"] },
   "텔미칸플러스정": { diseases: ["고혈압"], ingredients: ["텔미사르탄 (Telmisartan)", "히드로클로로티아지드 (Hydrochlorothiazide)"] },
   "텔미칸에이정": { diseases: ["고혈압"], ingredients: ["텔미사르탄 (Telmisartan)", "암로디핀 (Amlodipine)"] },
-  "텔미칸에이플러스정": { diseases: ["고혈압"], ingredients: ["텔미사르탄 (Telmisartan)", "암로디핀 (Amlodipine)", "히드로클로로티아지드 (Hydrochlorothiazide)"] },
+  "텔미칸에이플러스정": { diseases: ["고혈압"], ingredients: ["텔미사르탄 (Telmisartan)", "암로디핀 (Amlodipine)", "클로르탈리돈 (Chlorthalidone)"] },
   "텔미칸큐정": { diseases: ["고혈압", "이상지질혈증"], ingredients: ["텔미사르탄 (Telmisartan)", "암로디핀 (Amlodipine)", "로수바스타틴 (Rosuvastatin)"] },
   "트라바탄점안액0.004%": { diseases: ["녹내장"], ingredients: ["트라보프로스트 (Travoprost)"] },
   "트라마롤정": { diseases: ["만성통증"], ingredients: ["트라마돌 (Tramadol)", "아세트아미노펜 (Acetaminophen)"] },
@@ -828,7 +828,8 @@ const JEIL_DRUG_DB = {
   // 제일약품 전문의약품(slcate=01&smcate=01) 전수 품목 152개 — JEIL_DRUG_MAP 의 키와 동일
   product: Object.keys(JEIL_DRUG_MAP),
   // 매핑에 쓰인 성분 + 기존 성분 목록 (한글명 (English Name))
-  ingredient: ["콜린알포세레이트 (Choline Alfoscerate)", "모메타손푸로에이트 (Mometasone Furoate)", "나파모스타트메실산염 (Nafamostat Mesilate)", "애엽95%에탄올연조엑스 (Artemisia Herb 95% Ethanol Soft Extract)", "바레니클린 (Varenicline)", "도네페질 (Donepezil)", "트라넥삼산 (Tranexamic acid)", "두타스테리드 (Dutasteride)", "다파글리플로진 (Dapagliflozin)", "피오글리타존 (Pioglitazone)", "트라보프로스트 (Travoprost)", "티몰롤 (Timolol)", "프레가발린 (Pregabalin)", "발사르탄 (Valsartan)", "로수바스타틴 (Rosuvastatin)", "에제티미브 (Ezetimibe)", "라사길린 (Rasagiline)", "란소프라졸 (Lansoprazole)", "날트렉손 (Naltrexone)", "오메가3산에틸에스테르90 (Omega-3-acid Ethyl Esters 90)", "트리플루리딘 (Trifluridine)", "티피라실 (Tipiracil)", "리나글립틴 (Linagliptin)", "메트포르민 (Metformin)", "알프라졸람 (Alprazolam)", "리바스티그민 (Rivastigmine)", "리바록사반 (Rivaroxaban)", "베포타스틴 (Bepotastine)", "아토르바스타틴 (Atorvastatin)", "메만틴 (Memantine)", "글리메피리드 (Glimepiride)", "멜록시캄 (Meloxicam)", "실데나필 (Sildenafil)", "모사프리드 (Mosapride)", "몬테루카스트 (Montelukast)", "레보세티리진 (Levocetirizine)", "베라프로스트 (Beraprost)", "비베그론 (Vibegron)", "에피네프린 (Epinephrine)", "콜레칼시페롤 (Cholecalciferol)", "탄산칼슘 (Calcium Carbonate)", "랄록시펜 (Raloxifene)", "이반드론산 (Ibandronic acid)", "바제독시펜 (Bazedoxifene)", "프로피베린 (Propiverine)", "올메사르탄 (Olmesartan)", "암로디핀 (Amlodipine)", "히드로클로로티아지드 (Hydrochlorothiazide)", "세티리진 (Cetirizine)", "솔리페나신 (Solifenacin)", "티아넵틴 (Tianeptine)", "브린졸라미드 (Brinzolamide)", "브리모니딘 (Brimonidine)", "세레콕시브 (Celecoxib)", "이토프리드 (Itopride)", "아지트로마이신 (Azithromycin)", "리세드론산 (Risedronate)", "사르포그렐레이트 (Sarpogrelate)", "알푸조신 (Alfuzosin)", "에스오메프라졸 (Esomeprazole)", "피타바스타틴 (Pitavastatin)", "에페리손 (Eperisone)", "엔테카비르 (Entecavir)", "에르도스테인 (Erdosteine)", "세프디니르 (Cefdinir)", "자스타프라잔 (Zastaprazan)", "테가푸르 (Tegafur)", "우라실 (Uracil)", "세프트리악손 (Ceftriaxone)", "라푸티딘 (Lafutidine)", "이트라코나졸 (Itraconazole)", "멜라토닌 (Melatonin)", "에스몰롤 (Esmolol)", "실라자프릴 (Cilazapril)", "티옥트산 (Thioctic Acid)", "정제어유 (Fish Oil)", "푸르설티아민 (Fursultiamine)", "세파클러 (Cefaclor)", "클래리트로마이신 (Clarithromycin)", "엠파글리플로진 (Empagliflozin)", "에스시탈로프람 (Escitalopram)", "펜타닐 (Fentanyl)", "은행엽건조엑스 (Ginkgo Biloba Leaf Extract)", "프루칼로프라이드 (Prucalopride)", "레보플록사신 (Levofloxacin)", "클로피도그렐 (Clopidogrel)", "아스피린 (Aspirin)", "타다라필 (Tadalafil)", "파클리탁셀 (Paclitaxel)", "테네리글립틴 (Teneligliptin)", "테노포비르 (Tenofovir)", "텔미사르탄 (Telmisartan)", "트라마돌 (Tramadol)", "아세트아미노펜 (Acetaminophen)", "레보도파 (Levodopa)", "카르비도파 (Carbidopa)", "엔타카폰 (Entacapone)", "기메라실 (Gimeracil)", "오테라실 (Oteracil)", "올로파타딘 (Olopatadine)", "세피데로콜 (Cefiderocol)", "알렌드론산 (Alendronate)", "옥살리플라틴 (Oxaliplatin)", "피나스테리드 (Finasteride)", "필그라스팀 (Filgrastim)", "탐스로신 (Tamsulosin)", "히알루론산 (Hyaluronic acid)"],
+  ingredient: [...new Map([...Object.values(JEIL_DRUG_MAP).flatMap(v => v.ingredients), "콜린알포세레이트 (Choline Alfoscerate)", "모메타손푸로에이트 (Mometasone Furoate)", "나파모스타트메실산염 (Nafamostat Mesilate)", "애엽95%에탄올연조엑스 (Artemisia Herb 95% Ethanol Soft Extract)", "바레니클린 (Varenicline)", "도네페질 (Donepezil)", "트라넥삼산 (Tranexamic acid)", "두타스테리드 (Dutasteride)", "다파글리플로진 (Dapagliflozin)", "피오글리타존 (Pioglitazone)", "트라보프로스트 (Travoprost)", "티몰롤 (Timolol)", "프레가발린 (Pregabalin)", "발사르탄 (Valsartan)", "로수바스타틴 (Rosuvastatin)", "에제티미브 (Ezetimibe)", "라사길린 (Rasagiline)", "란소프라졸 (Lansoprazole)", "날트렉손 (Naltrexone)", "오메가3산에틸에스테르90 (Omega-3-acid Ethyl Esters 90)", "트리플루리딘 (Trifluridine)", "티피라실 (Tipiracil)", "리나글립틴 (Linagliptin)", "메트포르민 (Metformin)", "알프라졸람 (Alprazolam)", "리바스티그민 (Rivastigmine)", "리바록사반 (Rivaroxaban)", "베포타스틴 (Bepotastine)", "아토르바스타틴 (Atorvastatin)", "메만틴 (Memantine)", "글리메피리드 (Glimepiride)", "멜록시캄 (Meloxicam)", "실데나필 (Sildenafil)", "모사프리드 (Mosapride)", "몬테루카스트 (Montelukast)", "레보세티리진 (Levocetirizine)", "베라프로스트 (Beraprost)", "비베그론 (Vibegron)", "에피네프린 (Epinephrine)", "콜레칼시페롤 (Cholecalciferol)", "탄산칼슘 (Calcium Carbonate)", "랄록시펜 (Raloxifene)", "이반드론산 (Ibandronic acid)", "바제독시펜 (Bazedoxifene)", "프로피베린 (Propiverine)", "올메사르탄 (Olmesartan)", "암로디핀 (Amlodipine)", "히드로클로로티아지드 (Hydrochlorothiazide)", "세티리진 (Cetirizine)", "솔리페나신 (Solifenacin)", "티아넵틴 (Tianeptine)", "브린졸라미드 (Brinzolamide)", "브리모니딘 (Brimonidine)", "세레콕시브 (Celecoxib)", "이토프리드 (Itopride)", "아지트로마이신 (Azithromycin)", "리세드론산 (Risedronate)", "사르포그렐레이트 (Sarpogrelate)", "알푸조신 (Alfuzosin)", "에스오메프라졸 (Esomeprazole)", "피타바스타틴 (Pitavastatin)", "에페리손 (Eperisone)", "엔테카비르 (Entecavir)", "에르도스테인 (Erdosteine)", "세프디니르 (Cefdinir)", "자스타프라잔 (Zastaprazan)", "테가푸르 (Tegafur)", "우라실 (Uracil)", "세프트리악손 (Ceftriaxone)", "라푸티딘 (Lafutidine)", "이트라코나졸 (Itraconazole)", "멜라토닌 (Melatonin)", "에스몰롤 (Esmolol)", "실라자프릴 (Cilazapril)", "티옥트산 (Thioctic Acid)", "정제어유 (Fish Oil)", "푸르설티아민 (Fursultiamine)", "세파클러 (Cefaclor)", "클래리트로마이신 (Clarithromycin)", "엠파글리플로진 (Empagliflozin)", "에스시탈로프람 (Escitalopram)", "펜타닐 (Fentanyl)", "은행엽건조엑스 (Ginkgo Biloba Leaf Extract)", "프루칼로프라이드 (Prucalopride)", "레보플록사신 (Levofloxacin)", "클로피도그렐 (Clopidogrel)", "아스피린 (Aspirin)", "타다라필 (Tadalafil)", "파클리탁셀 (Paclitaxel)", "테네리글립틴 (Teneligliptin)", "테노포비르 (Tenofovir)", "텔미사르탄 (Telmisartan)", "트라마돌 (Tramadol)", "아세트아미노펜 (Acetaminophen)", "레보도파 (Levodopa)", "카르비도파 (Carbidopa)", "엔타카폰 (Entacapone)", "기메라실 (Gimeracil)", "오테라실 (Oteracil)", "올로파타딘 (Olopatadine)", "세피데로콜 (Cefiderocol)", "알렌드론산 (Alendronate)", "옥살리플라틴 (Oxaliplatin)", "피나스테리드 (Finasteride)", "필그라스팀 (Filgrastim)", "탐스로신 (Tamsulosin)", "히알루론산 (Hyaluronic acid)"]
+    .map(x => [x.replace(/\s*\([^)]*\)\s*/g, '').trim(), x])).values()],
   disease: ["알츠하이머", "인지장애", "알레르기비염", "급성췌장염", "혈액응고방지", "위염", "금연보조", "출혈질환", "전립선비대증", "탈모", "2형당뇨병", "녹내장", "신경병성통증", "고혈압", "이상지질혈증", "파킨슨병", "위식도역류질환", "알코올의존증", "대장암", "위암", "우울증", "불안장애", "심방세동", "정맥혈전색전증", "골관절염", "류마티스관절염", "발기부전", "폐동맥고혈압", "기능성소화불량", "천식", "만성동맥폐색증", "과민성방광", "기관지천식", "국소출혈", "골다공증", "두드러기", "고중성지방혈증", "역류성식도염", "세균성감염", "말초순환장애", "근골격계질환", "B형간염", "만성기관지염", "위궤양", "십이지장궤양", "진균감염", "불면증", "빈맥", "부정맥", "만성심부전", "비타민D결핍", "당뇨병성신경병증", "비타민결핍", "공황장애", "만성통증", "어지럼증", "이명", "변비", "폐렴", "동맥경화", "뇌졸중", "유방암", "난소암", "폐암", "알레르기결막염", "호중구감소증", "당뇨병"]
 };
 
@@ -838,15 +839,29 @@ const JEIL_DRUG_DB = {
  * ② 변형 접미사(플러스·듀오·메트·CR·엑스엘 등)가 있으면 기본 브랜드명도 함께 OR 검색
  *    리피토플러스정 → "리피토플러스" OR "리피토"  (3글자 미만으로 줄어드는 경우는 일반 단어와 겹치므로 생략: 로제듀오 → 로제 ✗)
  */
-const FORM_SUFFIX = /(구강붕해정|구강용해필름|점안현탁액|나잘스프레이|건조시럽|세립소아용|소아용|연질캡슐|서방캡슐|서방정|점안액|캡슐|패취|세립|츄정|정|주|액|\d+(?:\.\d+)?\s*(?:그램|밀리그램|mg|g|%|mcg))$/i;
+/**
+ * 제품명 → 검색용 브랜드명 (화면 칩은 원래 이름 그대로)
+ * 규칙 ① 명확한 의약품 제형 접미사만 끝에서 1회 제거 (가장 긴 제형부터 일치)
+ *      ② 끝부분 함량 표기(0.003%·250밀리그램·1그램·숫자)만 제거
+ *      ③ 안전장치: 잘라낸 결과가 2글자 이하가 되면 자르지 않고 그대로 유지 (베라실정 → 베라실, 절대 '베라' 아님)
+ * 플러스·듀오·에이·큐·엠·에스알처럼 브랜드 이름에 붙은 부분은 지우지 않음 (로제듀오정 → 로제듀오, 텔미칸에이플러스정 → 텔미칸에이플러스)
+ */
+const DOSAGE_FORMS = ['구강붕해정', '구강용해필름', '점안현탁액', '나잘스프레이', '연질캡슐', '서방캡슐', '세미서방정', '서방정', '건조시럽',
+  '세립소아용', '세미정', '점안액', '원주', '패취', '캡슐', '세립', '츄정', '정', '주', '액'];
+const DOSAGE_FORM_RE = new RegExp(`(${[...DOSAGE_FORMS].sort((a, b) => b.length - a.length).join('|')})$`);
+const STRENGTH_RE = /(\d+(?:\.\d+)?\s*(?:%|밀리그램|그램|mg|mcg|g)|\d+)$/i;
+const MIN_BRAND_LEN = 3;
+function stripDosageForm(text) {
+  const cutOnce = (str, re) => { const next = str.replace(re, '').trim(); return next.length >= MIN_BRAND_LEN ? next : str; };
+  let s = String(text || '').trim();
+  s = cutOnce(s, STRENGTH_RE);    // 이즈바점안액0.003% → 이즈바점안액 / 제클러캡슐250밀리그램 → 제클러캡슐
+  s = cutOnce(s, DOSAGE_FORM_RE); // 이즈바점안액 → 이즈바 / 베라실정 → 베라실 / 자큐보구강붕해정 → 자큐보
+  s = cutOnce(s, STRENGTH_RE);    // 파제오0.7% → 파제오 / 비유피4 → 비유피 / 제일하이비5 → 제일하이비
+  return s;
+}
 const VARIANT_SUFFIX = /(에이치씨티|플러스디|플러스|엑스알|에스알|엑스엘|듀오|메트|멜츠|세미|CR|XL|SR|에스|에이|큐|\d+)$/i;
 function productCoreNames(text) {
-  let base = String(text || '').trim();
-  for (let i = 0; i < 4; i++) {
-    const next = base.replace(FORM_SUFFIX, '').trim();
-    if (next === base || next.length < 2) break;
-    base = next;
-  }
+  const base = stripDosageForm(text);
   const names = [base];
   // 변형 접미사를 차례로 떼어 기본 브랜드명까지 (리나틴플러스엑스알 → 리나틴), 3글자 미만이 되면 중단
   let v = base;
@@ -869,12 +884,10 @@ function splitBilingual(text) {
 }
 /** 검색 쿼리: 영문 병기가 있으면 "한글" OR "English" 로 국문·영문 기사를 함께 검색 */
 function kwSearchQuery(text, cat) {
-  if (cat === 'product') { // 제품명: 제형 제거한 브랜드명으로 검색
-    const names = productCoreNames(text);
-    return names.length > 1 ? names.map(n => `"${n}"`).join(' OR ') : names[0];
-  }
-  const { ko, en } = splitBilingual(text);
-  return en ? `"${ko}" OR "${en}"` : ko;
+  // 검색에는 따옴표·OR 없이 순수 한글 키워드만 전달 (Google News RSS when: 파라미터와 충돌 방지)
+  const pure = String(text || '').replace(/\s*\([^)]*\)\s*/g, '').trim(); // '로수바스타틴 (Rosuvastatin)' → '로수바스타틴'
+  if (cat === 'product') return stripDosageForm(pure);                    // '로제듀오정' → '로제듀오'
+  return pure;
 }
 /** 요약 문장 점수용 키워드 텍스트 (제품은 브랜드명, 성분은 국·영문 모두) */
 function kwMatchText(text, cat) {
@@ -1309,10 +1322,8 @@ async function fetchGNews(kw, max) {
   const key = settings.gnewsKey.trim();
   if (!key) throw new Error('GNews API 키가 비어 있습니다');
   const from = new Date(Date.now() - periodMs(settings.period)).toISOString().replace(/\.\d{3}Z$/, 'Z');
-  const bi = splitBilingual(kw.text);
-  const q0 = kwSearchQuery(kw.text, kw.cat);
-  const gq = /\sOR\s/.test(q0) ? q0 : `"${q0}"`;
-  const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(gq)}${bi.en ? '' : '&lang=ko&country=kr'}&max=${Math.min(10, max)}&sortby=publishedAt&from=${from}&apikey=${encodeURIComponent(key)}`;
+  const gq = kwSearchQuery(kw.text, kw.cat); // 순수 한글 키워드
+  const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(gq)}&lang=ko&country=kr&max=${Math.min(10, max)}&sortby=publishedAt&from=${from}&apikey=${encodeURIComponent(key)}`;
   let text;
   try { text = await fetchText(url); }
   catch (e) {
@@ -1333,7 +1344,7 @@ async function fetchGNews(kw, max) {
 async function fetchNewsData(kw, max) {
   const key = settings.newsdataKey.trim();
   if (!key) throw new Error('NewsData.io API 키가 비어 있습니다');
-  const url = `https://newsdata.io/api/1/latest?apikey=${encodeURIComponent(key)}&q=${encodeURIComponent(kwSearchQuery(kw.text, kw.cat))}&language=${splitBilingual(kw.text).en ? 'ko,en' : 'ko'}&size=${Math.min(10, max)}`;
+  const url = `https://newsdata.io/api/1/latest?apikey=${encodeURIComponent(key)}&q=${encodeURIComponent(kwSearchQuery(kw.text, kw.cat))}&language=ko&size=${Math.min(10, max)}`;
   let text;
   try { text = await fetchText(url); }
   catch (e) {
@@ -1965,6 +1976,9 @@ async function collectNews(onlyTexts = null, opt = {}) {
   });
 
   const items = [], failures = [], ok = [], empty = [], via = new Set();
+  // 실제로 전송된 변환 검색어 기록 (0건일 때 원인 안내 배너에 표시)
+  const queries = targets.map((kw, i) => ({ keyword: kw.text, cat: kw.cat, query: kwSearchQuery(kw.text, kw.cat),
+    ok: !!results[i].ok, count: results[i].ok ? results[i].value.items.length : 0 }));
   console.groupCollapsed(`[MediBrief] 수집 결과 ${new Date().toLocaleString()} (${envLabel()})`);
   results.forEach((r, i) => {
     const kw = targets[i];
@@ -1998,10 +2012,11 @@ async function collectNews(onlyTexts = null, opt = {}) {
       via: [...new Set([...(meta.via || []), ...via])],
       okKeywords: [...new Set([...(meta.okKeywords || []).filter(k => !onlyTexts.includes(k)), ...ok])],
       failures: [...(meta.failures || []).filter(f => !onlyTexts.includes(f.keyword)), ...failures],
-      emptyKeywords: [...new Set([...(meta.emptyKeywords || []).filter(k => !onlyTexts.includes(k)), ...empty])]
+      emptyKeywords: [...new Set([...(meta.emptyKeywords || []).filter(k => !onlyTexts.includes(k)), ...empty])],
+      queries: [...(meta.queries || []).filter(q => !onlyTexts.includes(q.keyword)), ...queries]
     };
   } else {
-    meta = { lastCollected: new Date().toISOString(), via: [...via], okKeywords: ok, failures, emptyKeywords: empty };
+    meta = { lastCollected: new Date().toISOString(), via: [...via], okKeywords: ok, failures, emptyKeywords: empty, queries };
   }
   prepareSummaries(news);
   saveLS(LS_KEYS.news, news);
@@ -2455,8 +2470,61 @@ function renderStats() {
   $('#hdrUpdated').textContent = `마지막 수집: ${meta.lastCollected ? fmtDateTime(meta.lastCollected) : '-'}${(meta.via || []).length ? ' · via ' + meta.via.join(', ') : ''}`;
 }
 
+const PERIOD_LABEL = { '7d': '최근 7일', '15d': '최근 15일', '30d': '최근 1개월', '90d': '최근 3개월', '180d': '최근 6개월', '270d': '최근 9개월', '365d': '최근 12개월' };
+/**
+ * 수집 기사 0건 안내 배너 (실패 내역 표시 설정과 무관하게 항상 표시)
+ * - 실제 전송된 변환 검색어(키워드별 결과) / 수집 경로 차단 여부 / 기간 늘리기 등 해결 방법
+ */
+function zeroResultBannerHTML() {
+  const qs = (meta.queries || []).filter(q => keywords.some(k => k.text === q.keyword));
+  const failures = meta.failures || [];
+  const allFailed = qs.length > 0 && qs.every(q => !q.ok);
+  const someFailed = qs.some(q => !q.ok);
+  const reasons = failures.flatMap(f => (f.attempts || []).map(a => `${a.via}: ${a.reason}`));
+  const days = periodDays(settings.period);
+  const tips = [];
+  if (!navigator.onLine) tips.push('현재 기기가 오프라인입니다. 인터넷 연결을 확인하세요.');
+  if (allFailed) {
+    tips.push('모든 키워드에서 수집 경로 응답을 받지 못했습니다 → 공용 변환 서비스가 막혔거나(회사·병원 보안망 포함) 일시 장애일 가능성이 큽니다.');
+    if (!gasUrlValid(settings.gasUrl)) tips.push('설정 → 뉴스 소스 → ‘내 프록시(Apps Script)’를 연결하면 공용 서비스 차단과 무관하게 수집됩니다.');
+    tips.push('설정 → 뉴스 소스 → [연결 진단]으로 이 환경에서 동작하는 경로를 확인하세요.');
+  } else {
+    tips.push('수집 경로는 정상 응답했지만 기간 내 기사가 없습니다 → 검색어가 기사에 쓰이는 표현과 다를 수 있습니다.');
+    if (days < 30) tips.push(`수집 기간을 늘려 보세요 (현재 ${PERIOD_LABEL[settings.period] || settings.period} → ‘최근 15일’·‘최근 1개월’ 이상 권장).`);
+    tips.push('제품명은 기사에서 쓰는 이름(예: 회사명 없이 브랜드명만)으로 직접 입력란에 한 번 더 추가해 보세요.');
+  }
+  if (someFailed && !allFailed) tips.push('일부 키워드는 수집 경로 오류로 실패했습니다. 잠시 후 다시 시도하세요.');
+  const tone = allFailed ? { box: 'bg-rose-50 border-rose-200', title: 'text-rose-800', icon: '⛔' } : { box: 'bg-amber-50 border-amber-200', title: 'text-amber-800', icon: '🔎' };
+  const catLbl = c => CATS[c]?.label || '';
+  return `<div class="fade-in rounded-2xl border p-5 ${tone.box}">
+    <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+      <div class="min-w-0">
+        <h3 class="font-extrabold ${tone.title}">${tone.icon} 수집 기사 0건 — ${allFailed ? '수집 경로 차단(또는 장애)이 원인으로 보입니다' : '검색 결과가 없습니다'}</h3>
+        <p class="mt-1 text-sm text-slate-600">수집 기간: <b>${esc(PERIOD_LABEL[settings.period] || settings.period)}</b> · 수집 방식: ${esc(sourceLabel())} · 환경: ${esc(envLabel())}${meta.lastCollected ? ` · ${fmtDateTime(meta.lastCollected)}` : ''}</p>
+        ${qs.length ? `<div class="mt-3 text-xs font-bold text-slate-700 mb-1">실제로 전송된 검색어</div>
+        <div class="flex flex-wrap gap-1.5">${qs.map(q => `<span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white border ${q.ok ? 'border-slate-200' : 'border-rose-300'} text-xs">
+            <span class="text-slate-400">${esc(catLbl(q.cat))}</span><b class="text-navy-900">${esc(q.query)}</b>
+            ${q.query !== q.keyword ? `<span class="text-slate-400">← ${esc(q.keyword)}</span>` : ''}
+            <span class="${q.ok ? 'text-slate-500' : 'text-rose-600 font-bold'}">${q.ok ? `${q.count}건` : '경로 실패'}</span></span>`).join('')}</div>` : ''}
+        <div class="mt-3 text-xs text-slate-600"><div class="font-bold text-slate-700 mb-1">원인 및 해결 방법</div>
+          <ul class="list-disc pl-4 space-y-0.5">${tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
+        ${allFailed && reasons.length ? `<details class="mt-2 text-[11px] text-slate-500"><summary class="cursor-pointer font-semibold">경로별 실패 원인 보기</summary>
+          <div class="mt-1 space-y-0.5">${[...new Set(reasons)].slice(0, 12).map(r => `<div>${esc(r)}</div>`).join('')}</div></details>` : ''}
+      </div>
+      <div class="flex md:flex-col gap-2 shrink-0">
+        ${days < 30 && !allFailed ? `<button data-period-up="30d" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold">기간 ‘최근 1개월’로 다시 수집</button>` : ''}
+        ${days < 15 && !allFailed ? `<button data-period-up="15d" class="px-4 py-2.5 rounded-xl border border-amber-300 bg-white text-amber-800 text-sm font-bold">‘최근 15일’로 다시 수집</button>` : ''}
+        <button data-retry="all" class="px-4 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-white text-sm font-bold disabled:opacity-60">↻ 다시 수집</button>
+        ${allFailed ? `<button data-open-settings="source" data-diag="1" class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:border-teal-500 text-sm font-bold text-slate-700">연결 진단</button>` : ''}
+      </div>
+    </div></div>`;
+}
+
 function renderErrorBanner() {
   const banner = $('#errorBanner');
+  if (!news.length && meta.lastCollected && keywords.length && (meta.queries || []).length) {
+    banner.className = ''; banner.innerHTML = zeroResultBannerHTML(); return;
+  }
   const failures = meta.failures || [];
   const empties = (meta.emptyKeywords || []).filter(k => keywords.some(x => x.text === k));
   // 실패 숨김 모드: 배너 자체를 표시하지 않음
@@ -2608,12 +2676,12 @@ function renderNews() {
   const grid = $('#newsGrid'), empty = $('#emptyState');
   if (!news.length) {
     grid.innerHTML = '';
-    const failedAll = (meta.failures || []).length > 0;
+    const failedAll = (meta.failures || []).length > 0 || !!meta.lastCollected;
     empty.className = 'bg-white rounded-2xl border border-dashed border-slate-300 p-10 text-center';
     empty.innerHTML = failedAll
       ? `<div class="mx-auto w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl">📡</div>
          <h3 class="mt-4 font-extrabold text-navy-900">표시할 실시간 기사가 없습니다</h3>
-         <p class="mt-1 text-sm text-slate-500">${settings.showFailures ? '상단의 실패 원인을 확인한 뒤 다시 시도해 주세요.' : '잠시 후 다시 시도해 주세요.'}</p>
+         <p class="mt-1 text-sm text-slate-500">상단 안내 배너에서 실제 검색어와 원인을 확인한 뒤 다시 시도해 주세요.</p>
          <button data-retry="all" class="mt-5 px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-white text-sm font-bold disabled:opacity-60">↻ 다시 시도</button>`
       : `<div class="mx-auto w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl">📰</div>
          <h3 class="mt-4 font-extrabold text-navy-900">아직 수집된 뉴스가 없습니다</h3>
@@ -3570,6 +3638,8 @@ function bindEvents() {
       else collectNews();
       return;
     }
+    const up = e.target.closest('[data-period-up]');
+    if (up) { settings.period = up.dataset.periodUp; saveSettings(); $('#setPeriod').value = settings.period; collectNews(); return; }
     const open = e.target.closest('[data-open-settings]');
     if (open) { openSettings(open.dataset.openSettings); if (open.dataset.diag) runDiagnostics(); return; }
     if (e.target.closest('[data-close-settings]')) closeSettings();
