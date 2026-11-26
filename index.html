@@ -999,6 +999,32 @@ if (!Array.isArray(keywords)) keywords = DEFAULT_KEYWORDS.map(k => ({ ...k, id: 
 // 이전 버전 예시 키워드 4개를 손대지 않은 상태 그대로라면 비워서 깔끔하게 시작
 if (keywords.length === LEGACY_DEFAULT_KEYWORDS.length && keywords.every(k => LEGACY_DEFAULT_KEYWORDS.includes(`${k.cat}:${k.text}`))) keywords = [];
 
+/**
+ * 마이그레이션: 이전 버전에서 텔미칸에이플러스정과 함께 잘못 등록된 '히드로클로로티아지드' 칩 → '클로르탈리돈'으로 교체
+ * - 텔미칸에이플러스정이 등록되어 있을 때만 실행
+ * - 히드로클로로티아지드가 실제로 필요한 다른 등록 제품(텔미칸플러스정·코디오발탄정 등)이 있으면 그 칩은 지우지 않고 클로르탈리돈만 추가
+ */
+(function migrateTelmikanAPlus() {
+  const PRODUCT = '텔미칸에이플러스정', HCTZ = '히드로클로로티아지드 (Hydrochlorothiazide)', CHLOR = '클로르탈리돈 (Chlorthalidone)';
+  if (!keywords.some(k => k.cat === 'product' && k.text === PRODUCT)) return;
+  const hctzIdx = keywords.findIndex(k => k.cat === 'ingredient' && k.text === HCTZ);
+  const hasChlor = keywords.some(k => k.cat === 'ingredient' && k.text === CHLOR);
+  const otherNeedsHctz = keywords.some(k => k.cat === 'product' && k.text !== PRODUCT && (JEIL_DRUG_MAP[k.text]?.ingredients || []).includes(HCTZ));
+  let changed = false;
+  if (hctzIdx >= 0 && !otherNeedsHctz) {
+    if (hasChlor) keywords.splice(hctzIdx, 1);                    // 클로르탈리돈이 이미 있으면 히드로클로로티아지드만 제거
+    else keywords[hctzIdx] = { ...keywords[hctzIdx], text: CHLOR }; // 같은 자리에서 교체
+    changed = true;
+  } else if (!hasChlor) {
+    keywords.push({ id: uid(), cat: 'ingredient', text: CHLOR });   // 다른 제품이 히드로클로로티아지드를 쓰면 유지하고 클로르탈리돈만 추가
+    changed = true;
+  }
+  if (changed) {
+    saveLS(LS_KEYS.keywords, keywords);
+    console.info('[MediBrief] 텔미칸에이플러스정 성분 마이그레이션: 히드로클로로티아지드 → 클로르탈리돈', otherNeedsHctz ? '(다른 제품용 히드로클로로티아지드 칩은 유지)' : '');
+  }
+})();
+
 const prevSettings = loadLS('medibrief.settings.v2', {}); // 이전 버전에서 공통 설정만 이어받기
 let settings = { ...DEFAULT_SETTINGS, ...pickKeys(prevSettings, ['period', 'max', 'brand']), ...loadLS(LS_KEYS.settings, {}) };
 settings.racers = pickKeys({ ...DEFAULT_SETTINGS.racers, ...(settings.racers || {}) }, Object.keys(DEFAULT_SETTINGS.racers)); // 삭제된 경로(thingproxy 등) 정리
