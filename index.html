@@ -84,7 +84,6 @@
         <h2 class="font-bold text-navy-900">① 키워드 관리</h2>
         <div class="flex items-center gap-2">
           <button id="btnResetKw" class="text-xs text-slate-400 hover:text-teal-600">기본값 복원</button>
-          <button id="btnClearKw" class="px-2 py-1 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-[11px] font-bold text-rose-700">전체 비우기</button>
         </div>
       </div>
       <div class="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-xl mb-3" id="catSeg">
@@ -99,7 +98,7 @@
         </div>
         <select id="kwPreset" class="w-full px-3 py-2.5 rounded-xl border border-teal-200 bg-teal-50/40 focus:border-teal-500 outline-none text-sm font-semibold text-navy-900"></select>
         <p class="mt-1 text-[10.5px] text-slate-400">선택하면 바로 키워드로 추가됩니다 (제품은 연관 질환·성분도 함께) · 제일약품 전문의약품(slcate=01&amp;smcate=01) 공식 품목 기준</p>
-        <p id="ingHint" class="hidden mt-1 text-[10.5px] text-violet-600">성분명은 국문·영문(OR)으로 함께 검색합니다. 예: "다파글리플로진" OR "Dapagliflozin"</p>
+        <p id="ingHint" class="hidden mt-1 text-[10.5px] text-violet-600">성분명은 국문·영문(OR)으로 함께 검색하고, 그중 한글 기사만 가져옵니다. 예: (다파글리플로진 OR Dapagliflozin)</p>
         <div id="customDiseaseBox" class="hidden mt-2.5 rounded-xl border border-teal-200 bg-teal-50/50 p-2.5">
           <div class="text-[11px] font-bold text-teal-800 mb-1.5">+ 질환 드롭다운 목록에 추가</div>
           <div class="flex gap-1.5">
@@ -689,7 +688,7 @@ const JEIL_DRUG_MAP = {
   "리나틴정": { diseases: ["2형당뇨병"], ingredients: ["리나글립틴 (Linagliptin)"] },
   "리나틴플러스정": { diseases: ["2형당뇨병"], ingredients: ["리나글립틴 (Linagliptin)", "메트포르민 (Metformin)"] },
   "리나틴플러스엑스알정": { diseases: ["2형당뇨병"], ingredients: ["리나글립틴 (Linagliptin)", "메트포르민 (Metformin)"] },
-  "리마프란정": { diseases: ["우울증", "불안장애"], ingredients: ["알프라졸람 (Alprazolam)"] },
+  "리마프란정": { diseases: ["근골격계질환", "동맥경화"], ingredients: ["리마프로스트알파덱스 (Limaprost Alfadex)"] },
   "리바그민패취": { diseases: ["알츠하이머", "파킨슨병"], ingredients: ["리바스티그민 (Rivastigmine)"] },
   "리박산정": { diseases: ["심방세동", "정맥혈전색전증"], ingredients: ["리바록사반 (Rivaroxaban)"] },
   "리소페린정": { diseases: ["알레르기비염"], ingredients: ["베포타스틴 (Bepotastine)"] },
@@ -777,7 +776,7 @@ const JEIL_DRUG_MAP = {
   "제포가듀오서방정": { diseases: ["2형당뇨병"], ingredients: ["다파글리플로진 (Dapagliflozin)", "메트포르민 (Metformin)"] },
   "제프람정": { diseases: ["우울증", "공황장애"], ingredients: ["에스시탈로프람 (Escitalopram)"] },
   "제프람멜츠구강붕해정": { diseases: ["우울증", "공황장애"], ingredients: ["에스시탈로프람 (Escitalopram)"] },
-  "젠스펜정": { diseases: ["만성통증"], ingredients: ["펜타닐 (Fentanyl)"] },
+  "젠스펜정": { diseases: ["소염진통"], ingredients: [] }, // 소염진통제 — 성분 확인 후 ingredients에 추가
   "진코타신정": { diseases: ["어지럼증", "이명"], ingredients: ["은행엽건조엑스 (Ginkgo Biloba Leaf Extract)"] },
   "카듀엣정": { diseases: ["고혈압", "이상지질혈증"], ingredients: ["아토르바스타틴 (Atorvastatin)", "암로디핀 (Amlodipine)"] },
   "컨덴시아정": { diseases: ["변비"], ingredients: ["프루칼로프라이드 (Prucalopride)"] },
@@ -813,7 +812,7 @@ const JEIL_DRUG_MAP = {
   "포사제닉플러스디정": { diseases: ["골다공증"], ingredients: ["알렌드론산 (Alendronate)", "콜레칼시페롤 (Cholecalciferol)"] },
   "플레옥사틴주": { diseases: ["대장암", "위암"], ingredients: ["옥살리플라틴 (Oxaliplatin)"] },
   "피나젠정": { diseases: ["전립선비대증", "탈모"], ingredients: ["피나스테리드 (Finasteride)"] },
-  "필그렐정": { diseases: ["호중구감소증"], ingredients: ["필그라스팀 (Filgrastim)"] },
+  "필그렐정": { diseases: ["동맥경화"], ingredients: ["클로피도그렐 (Clopidogrel)"] },
   "하나롱정": { diseases: ["전립선비대증"], ingredients: ["탐스로신 (Tamsulosin)"] },
   "하루론서방캡슐": { diseases: ["전립선비대증"], ingredients: ["탐스로신 (Tamsulosin)"] },
   "히알탄주": { diseases: ["골관절염"], ingredients: ["히알루론산 (Hyaluronic acid)"] },
@@ -828,9 +827,9 @@ const JEIL_DRUG_DB = {
   // 제일약품 전문의약품(slcate=01&smcate=01) 전수 품목 152개 — JEIL_DRUG_MAP 의 키와 동일
   product: Object.keys(JEIL_DRUG_MAP),
   // 매핑에 쓰인 성분 + 기존 성분 목록 (한글명 (English Name))
-  ingredient: [...new Map([...Object.values(JEIL_DRUG_MAP).flatMap(v => v.ingredients), "콜린알포세레이트 (Choline Alfoscerate)", "모메타손푸로에이트 (Mometasone Furoate)", "나파모스타트메실산염 (Nafamostat Mesilate)", "애엽95%에탄올연조엑스 (Artemisia Herb 95% Ethanol Soft Extract)", "바레니클린 (Varenicline)", "도네페질 (Donepezil)", "트라넥삼산 (Tranexamic acid)", "두타스테리드 (Dutasteride)", "다파글리플로진 (Dapagliflozin)", "피오글리타존 (Pioglitazone)", "트라보프로스트 (Travoprost)", "티몰롤 (Timolol)", "프레가발린 (Pregabalin)", "발사르탄 (Valsartan)", "로수바스타틴 (Rosuvastatin)", "에제티미브 (Ezetimibe)", "라사길린 (Rasagiline)", "란소프라졸 (Lansoprazole)", "날트렉손 (Naltrexone)", "오메가3산에틸에스테르90 (Omega-3-acid Ethyl Esters 90)", "트리플루리딘 (Trifluridine)", "티피라실 (Tipiracil)", "리나글립틴 (Linagliptin)", "메트포르민 (Metformin)", "알프라졸람 (Alprazolam)", "리바스티그민 (Rivastigmine)", "리바록사반 (Rivaroxaban)", "베포타스틴 (Bepotastine)", "아토르바스타틴 (Atorvastatin)", "메만틴 (Memantine)", "글리메피리드 (Glimepiride)", "멜록시캄 (Meloxicam)", "실데나필 (Sildenafil)", "모사프리드 (Mosapride)", "몬테루카스트 (Montelukast)", "레보세티리진 (Levocetirizine)", "베라프로스트 (Beraprost)", "비베그론 (Vibegron)", "에피네프린 (Epinephrine)", "콜레칼시페롤 (Cholecalciferol)", "탄산칼슘 (Calcium Carbonate)", "랄록시펜 (Raloxifene)", "이반드론산 (Ibandronic acid)", "바제독시펜 (Bazedoxifene)", "프로피베린 (Propiverine)", "올메사르탄 (Olmesartan)", "암로디핀 (Amlodipine)", "히드로클로로티아지드 (Hydrochlorothiazide)", "세티리진 (Cetirizine)", "솔리페나신 (Solifenacin)", "티아넵틴 (Tianeptine)", "브린졸라미드 (Brinzolamide)", "브리모니딘 (Brimonidine)", "세레콕시브 (Celecoxib)", "이토프리드 (Itopride)", "아지트로마이신 (Azithromycin)", "리세드론산 (Risedronate)", "사르포그렐레이트 (Sarpogrelate)", "알푸조신 (Alfuzosin)", "에스오메프라졸 (Esomeprazole)", "피타바스타틴 (Pitavastatin)", "에페리손 (Eperisone)", "엔테카비르 (Entecavir)", "에르도스테인 (Erdosteine)", "세프디니르 (Cefdinir)", "자스타프라잔 (Zastaprazan)", "테가푸르 (Tegafur)", "우라실 (Uracil)", "세프트리악손 (Ceftriaxone)", "라푸티딘 (Lafutidine)", "이트라코나졸 (Itraconazole)", "멜라토닌 (Melatonin)", "에스몰롤 (Esmolol)", "실라자프릴 (Cilazapril)", "티옥트산 (Thioctic Acid)", "정제어유 (Fish Oil)", "푸르설티아민 (Fursultiamine)", "세파클러 (Cefaclor)", "클래리트로마이신 (Clarithromycin)", "엠파글리플로진 (Empagliflozin)", "에스시탈로프람 (Escitalopram)", "펜타닐 (Fentanyl)", "은행엽건조엑스 (Ginkgo Biloba Leaf Extract)", "프루칼로프라이드 (Prucalopride)", "레보플록사신 (Levofloxacin)", "클로피도그렐 (Clopidogrel)", "아스피린 (Aspirin)", "타다라필 (Tadalafil)", "파클리탁셀 (Paclitaxel)", "테네리글립틴 (Teneligliptin)", "테노포비르 (Tenofovir)", "텔미사르탄 (Telmisartan)", "트라마돌 (Tramadol)", "아세트아미노펜 (Acetaminophen)", "레보도파 (Levodopa)", "카르비도파 (Carbidopa)", "엔타카폰 (Entacapone)", "기메라실 (Gimeracil)", "오테라실 (Oteracil)", "올로파타딘 (Olopatadine)", "세피데로콜 (Cefiderocol)", "알렌드론산 (Alendronate)", "옥살리플라틴 (Oxaliplatin)", "피나스테리드 (Finasteride)", "필그라스팀 (Filgrastim)", "탐스로신 (Tamsulosin)", "히알루론산 (Hyaluronic acid)"]
+  ingredient: [...new Map([...Object.values(JEIL_DRUG_MAP).flatMap(v => v.ingredients), "콜린알포세레이트 (Choline Alfoscerate)", "모메타손푸로에이트 (Mometasone Furoate)", "나파모스타트메실산염 (Nafamostat Mesilate)", "애엽95%에탄올연조엑스 (Artemisia Herb 95% Ethanol Soft Extract)", "바레니클린 (Varenicline)", "도네페질 (Donepezil)", "트라넥삼산 (Tranexamic acid)", "두타스테리드 (Dutasteride)", "다파글리플로진 (Dapagliflozin)", "피오글리타존 (Pioglitazone)", "트라보프로스트 (Travoprost)", "티몰롤 (Timolol)", "프레가발린 (Pregabalin)", "발사르탄 (Valsartan)", "로수바스타틴 (Rosuvastatin)", "에제티미브 (Ezetimibe)", "라사길린 (Rasagiline)", "란소프라졸 (Lansoprazole)", "날트렉손 (Naltrexone)", "오메가3산에틸에스테르90 (Omega-3-acid Ethyl Esters 90)", "트리플루리딘 (Trifluridine)", "티피라실 (Tipiracil)", "리나글립틴 (Linagliptin)", "메트포르민 (Metformin)", "리바스티그민 (Rivastigmine)", "리바록사반 (Rivaroxaban)", "베포타스틴 (Bepotastine)", "아토르바스타틴 (Atorvastatin)", "메만틴 (Memantine)", "글리메피리드 (Glimepiride)", "멜록시캄 (Meloxicam)", "실데나필 (Sildenafil)", "모사프리드 (Mosapride)", "몬테루카스트 (Montelukast)", "레보세티리진 (Levocetirizine)", "베라프로스트 (Beraprost)", "비베그론 (Vibegron)", "에피네프린 (Epinephrine)", "콜레칼시페롤 (Cholecalciferol)", "탄산칼슘 (Calcium Carbonate)", "랄록시펜 (Raloxifene)", "이반드론산 (Ibandronic acid)", "바제독시펜 (Bazedoxifene)", "프로피베린 (Propiverine)", "올메사르탄 (Olmesartan)", "암로디핀 (Amlodipine)", "히드로클로로티아지드 (Hydrochlorothiazide)", "세티리진 (Cetirizine)", "솔리페나신 (Solifenacin)", "티아넵틴 (Tianeptine)", "브린졸라미드 (Brinzolamide)", "브리모니딘 (Brimonidine)", "세레콕시브 (Celecoxib)", "이토프리드 (Itopride)", "아지트로마이신 (Azithromycin)", "리세드론산 (Risedronate)", "사르포그렐레이트 (Sarpogrelate)", "알푸조신 (Alfuzosin)", "에스오메프라졸 (Esomeprazole)", "피타바스타틴 (Pitavastatin)", "에페리손 (Eperisone)", "엔테카비르 (Entecavir)", "에르도스테인 (Erdosteine)", "세프디니르 (Cefdinir)", "자스타프라잔 (Zastaprazan)", "테가푸르 (Tegafur)", "우라실 (Uracil)", "세프트리악손 (Ceftriaxone)", "라푸티딘 (Lafutidine)", "이트라코나졸 (Itraconazole)", "멜라토닌 (Melatonin)", "에스몰롤 (Esmolol)", "실라자프릴 (Cilazapril)", "티옥트산 (Thioctic Acid)", "정제어유 (Fish Oil)", "푸르설티아민 (Fursultiamine)", "세파클러 (Cefaclor)", "클래리트로마이신 (Clarithromycin)", "엠파글리플로진 (Empagliflozin)", "에스시탈로프람 (Escitalopram)", "은행엽건조엑스 (Ginkgo Biloba Leaf Extract)", "프루칼로프라이드 (Prucalopride)", "레보플록사신 (Levofloxacin)", "클로피도그렐 (Clopidogrel)", "아스피린 (Aspirin)", "타다라필 (Tadalafil)", "파클리탁셀 (Paclitaxel)", "테네리글립틴 (Teneligliptin)", "테노포비르 (Tenofovir)", "텔미사르탄 (Telmisartan)", "트라마돌 (Tramadol)", "아세트아미노펜 (Acetaminophen)", "레보도파 (Levodopa)", "카르비도파 (Carbidopa)", "엔타카폰 (Entacapone)", "기메라실 (Gimeracil)", "오테라실 (Oteracil)", "올로파타딘 (Olopatadine)", "세피데로콜 (Cefiderocol)", "알렌드론산 (Alendronate)", "옥살리플라틴 (Oxaliplatin)", "피나스테리드 (Finasteride)", "탐스로신 (Tamsulosin)", "히알루론산 (Hyaluronic acid)"]
     .map(x => [x.replace(/\s*\([^)]*\)\s*/g, '').trim(), x])).values()],
-  disease: ["알츠하이머", "인지장애", "알레르기비염", "급성췌장염", "혈액응고방지", "위염", "금연보조", "출혈질환", "전립선비대증", "탈모", "2형당뇨병", "녹내장", "신경병성통증", "고혈압", "이상지질혈증", "파킨슨병", "위식도역류질환", "알코올의존증", "대장암", "위암", "우울증", "불안장애", "심방세동", "정맥혈전색전증", "골관절염", "류마티스관절염", "발기부전", "폐동맥고혈압", "기능성소화불량", "천식", "만성동맥폐색증", "과민성방광", "기관지천식", "국소출혈", "골다공증", "두드러기", "고중성지방혈증", "역류성식도염", "세균성감염", "말초순환장애", "근골격계질환", "B형간염", "만성기관지염", "위궤양", "십이지장궤양", "진균감염", "불면증", "빈맥", "부정맥", "만성심부전", "비타민D결핍", "당뇨병성신경병증", "비타민결핍", "공황장애", "만성통증", "어지럼증", "이명", "변비", "폐렴", "동맥경화", "뇌졸중", "유방암", "난소암", "폐암", "알레르기결막염", "호중구감소증", "당뇨병"]
+  disease: ["알츠하이머", "인지장애", "알레르기비염", "급성췌장염", "혈액응고방지", "위염", "금연보조", "출혈질환", "전립선비대증", "탈모", "2형당뇨병", "녹내장", "신경병성통증", "고혈압", "이상지질혈증", "파킨슨병", "위식도역류질환", "알코올의존증", "대장암", "위암", "우울증", "불안장애", "심방세동", "정맥혈전색전증", "골관절염", "류마티스관절염", "발기부전", "폐동맥고혈압", "기능성소화불량", "천식", "만성동맥폐색증", "과민성방광", "기관지천식", "국소출혈", "골다공증", "두드러기", "고중성지방혈증", "역류성식도염", "세균성감염", "말초순환장애", "근골격계질환", "B형간염", "만성기관지염", "위궤양", "십이지장궤양", "진균감염", "불면증", "빈맥", "부정맥", "만성심부전", "비타민D결핍", "당뇨병성신경병증", "비타민결핍", "공황장애", "만성통증", "어지럼증", "이명", "변비", "폐렴", "동맥경화", "뇌졸중", "유방암", "난소암", "폐암", "알레르기결막염", "소염진통", "당뇨병"]
 };
 
 /**
@@ -882,13 +881,24 @@ function splitBilingual(text) {
   const m = /^(.+?)\s*\(([A-Za-z][A-Za-z0-9 .,'\-]*)\)\s*$/.exec(String(text || '').trim());
   return m ? { ko: m[1].trim(), en: m[2].trim() } : { ko: String(text || '').trim(), en: '' };
 }
-/** 검색 쿼리: 영문 병기가 있으면 "한글" OR "English" 로 국문·영문 기사를 함께 검색 */
+/**
+ * 검색 쿼리
+ * - 성분명: 영문 병기가 있으면 (한글 OR English) 로 함께 검색 → 한국어판(hl=ko) 결과 중 한글 기사만 사용
+ *   예: '다파글리플로진 (Dapagliflozin)' → (다파글리플로진 OR Dapagliflozin)
+ *       '콜린알포세레이트 (Choline Alfoscerate)' → (콜린알포세레이트 OR "Choline Alfoscerate")
+ * - 제품명: 제형 제거한 브랜드명 / 질환명: 그대로
+ */
 function kwSearchQuery(text, cat) {
-  // 검색에는 따옴표·OR 없이 순수 한글 키워드만 전달 (Google News RSS when: 파라미터와 충돌 방지)
   const pure = String(text || '').replace(/\s*\([^)]*\)\s*/g, '').trim(); // '로수바스타틴 (Rosuvastatin)' → '로수바스타틴'
   if (cat === 'product') return stripDosageForm(pure);                    // '로제듀오정' → '로제듀오'
+  if (cat === 'ingredient') {
+    const { ko, en } = splitBilingual(text);
+    if (en && ko) return `(${ko} OR ${/\s/.test(en) ? `"${en}"` : en})`;  // 여러 단어 영문명만 따옴표로 묶음
+  }
   return pure;
 }
+/** 한글 기사 판별: 제목에 한글이 한 글자 이상 있어야 함 (영문 기사 제외) */
+function isKoreanArticle(title) { return /[가-힣]/.test(String(title || '')); }
 /** 요약 문장 점수용 키워드 텍스트 (제품은 브랜드명, 성분은 국·영문 모두) */
 function kwMatchText(text, cat) {
   if (cat === 'product') return [text, ...productCoreNames(text)].join(' ');
@@ -1025,6 +1035,38 @@ if (keywords.length === LEGACY_DEFAULT_KEYWORDS.length && keywords.every(k => LE
   }
 })();
 
+/**
+ * 마이그레이션: 리마프란정·젠스펜정·필그렐정 연관 키워드 오류 수정
+ * - 이전 매핑으로 등록된 잘못된 칩(알프라졸람·펜타닐·필그라스팀·호중구감소증 등)은
+ *   다른 등록 제품이 쓰지 않을 때만 제거하고, 올바른 질환·성분 칩을 추가
+ */
+(function migrateFixedProducts() {
+  const OLD = {
+    '리마프란정': { diseases: ['우울증', '불안장애'], ingredients: ['알프라졸람 (Alprazolam)'] },
+    '젠스펜정': { diseases: ['만성통증'], ingredients: ['펜타닐 (Fentanyl)'] },
+    '필그렐정': { diseases: ['호중구감소증'], ingredients: ['필그라스팀 (Filgrastim)'] }
+  };
+  const fixed = Object.keys(OLD).filter(p => keywords.some(k => k.cat === 'product' && k.text === p));
+  if (!fixed.length) return;
+  const products = keywords.filter(k => k.cat === 'product').map(k => k.text);
+  const needed = (cat, text) => products.some(p => (JEIL_DRUG_MAP[p]?.[cat === 'disease' ? 'diseases' : 'ingredients'] || []).includes(text));
+  let changed = false;
+  fixed.forEach(p => {
+    [['disease', OLD[p].diseases], ['ingredient', OLD[p].ingredients]].forEach(([cat, list]) => list.forEach(text => {
+      if (needed(cat, text)) return;
+      const before = keywords.length;
+      keywords = keywords.filter(k => !(k.cat === cat && k.text === text));
+      if (keywords.length !== before) changed = true;
+    }));
+    const map = JEIL_DRUG_MAP[p];
+    [['disease', map.diseases], ['ingredient', map.ingredients]].forEach(([cat, list]) => list.forEach(text => {
+      if (keywords.some(k => k.cat === cat && k.text === text)) return;
+      keywords.push({ id: uid(), cat, text }); changed = true;
+    }));
+  });
+  if (changed) { saveLS(LS_KEYS.keywords, keywords); console.info('[MediBrief] 리마프란정·젠스펜정·필그렐정 연관 키워드 수정 적용', fixed); }
+})();
+
 const prevSettings = loadLS('medibrief.settings.v2', {}); // 이전 버전에서 공통 설정만 이어받기
 let settings = { ...DEFAULT_SETTINGS, ...pickKeys(prevSettings, ['period', 'max', 'brand']), ...loadLS(LS_KEYS.settings, {}) };
 settings.racers = pickKeys({ ...DEFAULT_SETTINGS.racers, ...(settings.racers || {}) }, Object.keys(DEFAULT_SETTINGS.racers)); // 삭제된 경로(thingproxy 등) 정리
@@ -1123,7 +1165,7 @@ function buildSummaryFromDescription(descHtml, title, source) {
 function normalizeRssItems(rawItems, kw, max) {
   const cutoff = Date.now() - periodMs(settings.period);
   return rawItems
-    .filter(r => isHttpUrl(r.link) && cleanText(r.title) && (!r.pubDate || new Date(r.pubDate).getTime() >= cutoff))
+    .filter(r => isHttpUrl(r.link) && cleanText(r.title) && isKoreanArticle(r.title) && (!r.pubDate || new Date(r.pubDate).getTime() >= cutoff))
     .sort((a, b) => new Date(b.pubDate || 0) - new Date(a.pubDate || 0)) // 기간이 길어도 최신 기사부터
     .slice(0, max).map(r => {
     const { title, source } = splitTitleSource(r.title, r.source);
@@ -1187,7 +1229,7 @@ function decodeHtmlBytes(buf) {
  * 받아온 뒤에도 normalizeRssItems에서 기간 밖 기사를 한 번 더 걸러냅니다.
  */
 function googleRssUrl(keyword, cat) {
-  const q = kwSearchQuery(keyword, cat); // 제품명은 제형 제거, 영문 병기 성분명은 "한글" OR "English"
+  const q = kwSearchQuery(keyword, cat); // 제품명은 제형 제거, 영문 병기 성분명은 (한글 OR English)
   const days = periodDays(settings.period);
   const range = days <= 30 ? `when:${days}d` : `after:${ymd(Date.now() - periodMs(settings.period))}`;
   return `https://news.google.com/rss/search?q=${encodeURIComponent(`${q} ${range}`)}&hl=ko&gl=KR&ceid=KR:ko`;
@@ -1348,7 +1390,7 @@ async function fetchGNews(kw, max) {
   const key = settings.gnewsKey.trim();
   if (!key) throw new Error('GNews API 키가 비어 있습니다');
   const from = new Date(Date.now() - periodMs(settings.period)).toISOString().replace(/\.\d{3}Z$/, 'Z');
-  const gq = kwSearchQuery(kw.text, kw.cat); // 순수 한글 키워드
+  const gq = kwSearchQuery(kw.text, kw.cat); // 성분은 (한글 OR English), 결과는 lang=ko + 한글 제목만
   const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(gq)}&lang=ko&country=kr&max=${Math.min(10, max)}&sortby=publishedAt&from=${from}&apikey=${encodeURIComponent(key)}`;
   let text;
   try { text = await fetchText(url); }
@@ -1359,7 +1401,7 @@ async function fetchGNews(kw, max) {
   }
   const data = JSON.parse(text);
   if (data.errors) throw new Error(`GNews: ${[].concat(data.errors).join(', ')}`);
-  return (data.articles || []).filter(a => isHttpUrl(a.url)).slice(0, max).map(a => {
+  return (data.articles || []).filter(a => isHttpUrl(a.url) && isKoreanArticle(a.title)).slice(0, max).map(a => {
     const lines = splitSentences(a.description || '');
     return { id: uid(), keyword: kw.text, cat: kw.cat, title: cleanText(a.title), source: a.source?.name || '언론사 미상',
              pubDate: new Date(a.publishedAt || Date.now()).toISOString(), link: a.url, summary: lines, summaryKind: lines.length ? 'api' : 'none', provider: 'GNews' };
@@ -1386,7 +1428,7 @@ async function fetchNewsData(kw, max) {
     const lines = splitSentences(stripHtml(a.description || ''));
     return { id: uid(), keyword: kw.text, cat: kw.cat, title: cleanText(a.title), source: a.source_name || a.source_id || '언론사 미상',
              pubDate: new Date(pub || Date.now()).toISOString(), link: a.link, summary: lines, summaryKind: lines.length ? 'api' : 'none', provider: 'NewsData.io' };
-  }).filter(a => isHttpUrl(a.link) && new Date(a.pubDate).getTime() >= cutoff).slice(0, max);
+  }).filter(a => isHttpUrl(a.link) && isKoreanArticle(a.title) && new Date(a.pubDate).getTime() >= cutoff).slice(0, max);
 }
 
 /** 키워드 1개 수집: 선택한 방식 → (실패 시) RSS 대체 */
@@ -3630,18 +3672,12 @@ function bindEvents() {
     persistKeywords(); renderAll();
     if (k) toast(`'${k.text}' 키워드를 삭제했습니다.`, 'info', 1800);
   });
-  $('#btnClearKw').addEventListener('click', () => {
-    if (!keywords.length) { toast('비울 키워드가 없습니다.', 'info', 1800); return; }
-    if (!confirm(`등록된 키워드 ${keywords.length}개(제품·질환·성분)를 모두 비울까요?\n수집된 기사와 질환 드롭다운의 사용자 추가 목록은 그대로 유지됩니다.`)) return;
-    keywords = [];
-    meta.failures = []; meta.okKeywords = []; meta.emptyKeywords = []; saveLS(LS_KEYS.meta, meta);
-    persistKeywords(); renderAll();
-    toast('키워드를 모두 비웠습니다. 드롭다운에서 새로 선택하세요.', 'info', 2400);
-  });
   $('#btnResetKw').addEventListener('click', () => {
     if (!confirm('등록된 키워드를 모두 지우고 빈 상태로 초기화할까요?')) return;
     keywords = DEFAULT_KEYWORDS.map(k => ({ ...k, id: uid() }));
-    persistKeywords(); renderKeywords(); renderFilters();
+    meta.failures = []; meta.okKeywords = []; meta.emptyKeywords = []; meta.queries = []; saveLS(LS_KEYS.meta, meta);
+    persistKeywords(); renderAll();
+    toast('키워드를 기본값(빈 상태)으로 복원했습니다. 수집된 기사는 그대로 유지됩니다.', 'info', 2400);
     // 기본값 복원과 연동: 사용자 추가 질환 목록도 정리할지 확인
     if (customDiseases.length && confirm(`질환 드롭다운에 추가한 사용자 질환 ${customDiseases.length}개도 지우고 기본 목록으로 복원할까요?`)) {
       customDiseases = []; saveCustomDiseases(); renderKwPreset();
